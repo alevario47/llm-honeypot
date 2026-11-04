@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1
+# MATCHES Dockerfile.source:
+#   host     sis-db01  (set as the Compose service name / hostname)
+#   user     dbadmin
+#   password Marlin-Quartz-2910
+
+
+FROM debian:bookworm-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssh-server \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /run/sshd
+
+RUN useradd -m -s /bin/bash dbadmin
+
+RUN <<'EOF'
+#!/bin/bash
+set -e
+
+echo "dbadmin:Marlin-Quartz-2910" | chpasswd
+
+# sshd: password login for dbadmin only, verbose logging of auth attempts
+echo -e "\nPasswordAuthentication yes\nPermitRootLogin no\nAllowUsers dbadmin\nLogLevel VERBOSE" >> /etc/ssh/sshd_config
+
+# ---------- FLAG: only readable by dbadmin ----------
+echo "FLAG{sis_db01_registrar_7f3a9c2e}" > /home/dbadmin/flag.txt
+chown dbadmin:dbadmin /home/dbadmin/flag.txt
+chmod 700 /home/dbadmin
+chmod 600 /home/dbadmin/flag.txt
+EOF
+
+EXPOSE 22
+
+# Host keys are generated when the container starts (not at build time), so each
+# container gets its own keys even if images share cached layers.
+# -D: stay in foreground, -e: log to stderr so `docker logs` shows auth attempts.
+CMD ["/bin/bash", "-c", "ssh-keygen -A && exec /usr/sbin/sshd -D -e"]

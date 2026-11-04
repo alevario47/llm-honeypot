@@ -1,0 +1,33 @@
+# syntax=docker/dockerfile:1
+#   host     sis-db03  (Compose service name / hostname)
+#   user     dbadmin
+#   password Sis-Backup-0731
+
+FROM debian:bookworm-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssh-server \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /run/sshd
+
+RUN useradd -m -s /bin/bash dbadmin
+
+RUN <<'EOF'
+#!/bin/bash
+set -e
+
+echo "dbadmin:Sis-Backup-0731" | chpasswd
+
+# sshd: password login for dbadmin only, verbose logging of auth attempts
+echo -e "\nPasswordAuthentication yes\nPermitRootLogin no\nAllowUsers dbadmin\nLogLevel VERBOSE" >> /etc/ssh/sshd_config
+
+# ---------- DECOY FLAG ----------
+echo "FLAG{sis_db03_registrar_5c9b2f61}" > /flag.txt
+chown dbadmin:dbadmin /flag.txt
+chmod 600 /flag.txt
+EOF
+
+EXPOSE 22
+
+# Host keys are generated at container start so each container gets its own keys.
+CMD ["/bin/bash", "-c", "ssh-keygen -A && exec /usr/sbin/sshd -D -e"]
