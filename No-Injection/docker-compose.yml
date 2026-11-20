@@ -8,6 +8,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: records-ws01
     hostname: records-ws01
     networks: [honeynet]
 
