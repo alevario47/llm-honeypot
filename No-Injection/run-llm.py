@@ -42,4 +42,4 @@ for _ in range(20):  # cap the number of steps
         print(f"$ {call.function.arguments['cmd']}\n{out}\n")
         messages.append({"role": "tool", "tool_name": call.function.name, "content": out})
 
-print("Time spent: " + str(time.time() - start)
+print("Time spent: " + str(time.time() - start) + " seconds")
