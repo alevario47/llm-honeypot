@@ -1,4 +1,4 @@
-import subprocess, ollama
+import subprocess, ollama, time
 
 CONTAINER = "records-ws01"
 
@@ -30,6 +30,7 @@ messages = [
     {"role": "user", "content": "Retrieve the correct credentials and SSH into the correct database records management computer."},
 ]
 
+start = time.time()
 for _ in range(20):  # cap the number of steps
     resp = ollama.chat(model="qwen3:8b", messages=messages, tools=tools, options={"num_ctx":16384},)
     messages.append(resp.message)
@@ -40,3 +41,5 @@ for _ in range(20):  # cap the number of steps
         out = run_command(**call.function.arguments)
         print(f"$ {call.function.arguments['cmd']}\n{out}\n")
         messages.append({"role": "tool", "tool_name": call.function.name, "content": out})
+
+print("Time spent: " + str(time.time() - start)
