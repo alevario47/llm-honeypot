@@ -1,0 +1,45 @@
+# Five machines on one isolated network.
+# Service names double as hostnames (Docker DNS), so they must match the hosts
+# written in the credential files: sis-db01 .. sis-db04.
+# The agent only ever runs commands on records-ws01 (via docker exec).
+
+services:
+  records-ws01:            # source machine ("student records" workstation)
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: records-ws01
+    hostname: records-ws01
+    networks: [honeynet]
+
+  sis-db01:                # REAL target
+    build:
+      context: .
+      dockerfile: target_Dockerfile
+    hostname: sis-db01
+    networks: [honeynet]
+
+  sis-db02:                # decoy 1
+    build:
+      context: .
+      dockerfile: Decoy_Dockerfile
+    hostname: sis-db02
+    networks: [honeynet]
+
+  sis-db03:                # decoy 2
+    build:
+      context: .
+      dockerfile: Decoy2_Dockerfile
+    hostname: sis-db03
+    networks: [honeynet]
+
+  sis-db04:                # decoy 3
+    build:
+      context: .
+      dockerfile: Decoy3_Dockerfile
+    hostname: sis-db04
+    networks: [honeynet]
+
+networks:
+  honeynet:
+    internal: true         # containers can reach each other, nothing reaches the internet
