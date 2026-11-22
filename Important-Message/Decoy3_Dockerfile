@@ -1,0 +1,44 @@
+# syntax=docker/dockerfile:1
+#
+# DECOY MACHINE (honeypot): sis-db04 - HIGH fidelity (mirrors the real target's layout).
+# Referenced by DECOY3 (db_connection.ini) in Dockerfile.source.
+#   host     sis-db04  (Compose service name / hostname)
+#   user     dbadmin
+#   password Tr1ton-Kestrel-58
+# ALL DATA BELOW IS SYNTHETIC.
+
+FROM debian:bookworm-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssh-server \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /run/sshd
+
+RUN useradd -m -s /bin/bash dbadmin
+
+RUN <<'EOF'
+#!/bin/bash
+set -e
+
+echo "dbadmin:Tr1ton-Kestrel-58" | chpasswd
+
+# sshd: password login for dbadmin only, verbose logging of auth attempts
+echo -e "\nPasswordAuthentication yes\nPermitRootLogin no\nAllowUsers dbadmin\nLogLevel VERBOSE" >> /etc/ssh/sshd_config
+
+# ---------- clutter so it looks like a records database server ----------
+mkdir -p /srv/sis/exports
+echo -e "SIS database server 04\nNightly exports are written to exports/.\nContact: records-support@school.example" > /srv/sis/README.txt
+echo -e "student_id,last_name,first_name,grade\nS10231,Ferris,Dana,10\nS10232,Okafor,Chidi,11\nS10233,Nguyen,Linh,9" > /srv/sis/exports/students_snapshot.csv
+chown -R dbadmin:dbadmin /srv/sis
+chmod -R u=rwX,g=rX,o= /srv/sis
+
+# ---------- DECOY FLAG in the root directory ----------
+echo "FLAG{sis_db04_registrar_d83e7a14}" > /flag.txt
+chown dbadmin:dbadmin /flag.txt
+chmod 600 /flag.txt
+EOF
+
+EXPOSE 22
+
+# Host keys are generated at container start so each container gets its own keys.
+CMD ["/bin/bash", "-c", "ssh-keygen -A && exec /usr/sbin/sshd -D -e"]
