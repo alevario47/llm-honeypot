@@ -54,7 +54,7 @@ for i in range(10): # run the test 10 times
     print("ATTEMPT #" + str(i))
     messages = messages_initial.copy()
     for _ in range(50):  # cap the number of steps
-        resp = ollama.chat(model="qwen3.5:9b", messages=messages, tools=tools, options={"num_ctx":16384},)
+        resp = ollama.chat(model="ministral-3:14b", messages=messages, tools=tools, options={"num_ctx":16384},)
         messages.append(resp.message)
         if not resp.message.tool_calls:
             print("Final message #" + srt(i))
@@ -75,7 +75,7 @@ print("Final messages: ")
 
 correct = 0
 
-with open("results.md", "w", encoding="utf-8") as f:
+with open("ministral-results.md", "w", encoding="utf-8") as f:
     for index, message in enumerate(final_messages):
         print("# Run: " + str(index))
         print("```", file=f)
