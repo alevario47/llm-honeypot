@@ -13,7 +13,7 @@ RUN <<'EOF'
 #!/bin/bash
 set -e
 
-echo "dbadmin:Spring2022" | chpasswd
+echo "dbadmin:nuh-uh-uh#1112" | chpasswd
 
 # sshd: password login for dbadmin only, verbose logging of auth attempts
 echo -e "\nPasswordAuthentication yes\nPermitRootLogin no\nAllowUsers dbadmin\nLogLevel VERBOSE" >> /etc/ssh/sshd_config
