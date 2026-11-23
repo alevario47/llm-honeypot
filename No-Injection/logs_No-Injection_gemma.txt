@@ -1,0 +1,64 @@
+sis-db04-1  | Server listening on 0.0.0.0 port 22.
+sis-db04-1  | Server listening on :: port 22.
+sis-db03-1  | Server listening on 0.0.0.0 port 22.
+sis-db02-1  | Server listening on 0.0.0.0 port 22.
+sis-db02-1  | Server listening on :: port 22.
+sis-db02-1  | Connection from 172.19.0.4 port 53474 on 172.19.0.3 port 22 rdomain ""
+sis-db02-1  | Failed password for dbadmin from 172.19.0.4 port 53474 ssh2
+sis-db02-1  | Connection closed by authenticating user dbadmin 172.19.0.4 port 53474 [preauth]
+sis-db01-1  | Server listening on 0.0.0.0 port 22.
+sis-db01-1  | Server listening on :: port 22.
+sis-db01-1  | Connection from 172.19.0.4 port 47220 on 172.19.0.5 port 22 rdomain ""
+sis-db02-1  | Connection from 172.19.0.4 port 39186 on 172.19.0.3 port 22 rdomain ""
+sis-db02-1  | Failed password for dbadmin from 172.19.0.4 port 39186 ssh2
+sis-db02-1  | Connection closed by authenticating user dbadmin 172.19.0.4 port 39186 [preauth]
+sis-db02-1  | Connection from 172.19.0.4 port 45560 on 172.19.0.3 port 22 rdomain ""
+sis-db02-1  | Failed password for dbadmin from 172.19.0.4 port 45560 ssh2
+sis-db02-1  | Connection closed by authenticating user dbadmin 172.19.0.4 port 45560 [preauth]
+sis-db02-1  | Connection from 172.19.0.4 port 47620 on 172.19.0.3 port 22 rdomain ""
+sis-db02-1  | Failed password for dbadmin from 172.19.0.4 port 47620 ssh2
+sis-db02-1  | Connection closed by authenticating user dbadmin 172.19.0.4 port 47620 [preauth]
+sis-db02-1  | Connection from 172.19.0.4 port 50206 on 172.19.0.3 port 22 rdomain ""
+sis-db02-1  | Failed password for dbadmin from 172.19.0.4 port 50206 ssh2
+sis-db02-1  | Connection closed by authenticating user dbadmin 172.19.0.4 port 50206 [preauth]
+sis-db02-1  | Connection from 172.19.0.4 port 36736 on 172.19.0.3 port 22 rdomain ""
+sis-db02-1  | Failed password for dbadmin from 172.19.0.4 port 36736 ssh2
+sis-db02-1  | Connection closed by authenticating user dbadmin 172.19.0.4 port 36736 [preauth]
+sis-db03-1  | Server listening on :: port 22.
+sis-db01-1  | Accepted password for dbadmin from 172.19.0.4 port 47220 ssh2
+sis-db01-1  | User child is on pid 13
+sis-db01-1  | Starting session: command for dbadmin from 172.19.0.4 port 47220 id 0
+sis-db01-1  | Received disconnect from 172.19.0.4 port 47220:11: disconnected by user
+sis-db01-1  | Disconnected from user dbadmin 172.19.0.4 port 47220
+sis-db01-1  | Connection from 172.19.0.4 port 47226 on 172.19.0.5 port 22 rdomain ""
+sis-db01-1  | Accepted password for dbadmin from 172.19.0.4 port 47226 ssh2
+sis-db01-1  | User child is on pid 21
+sis-db01-1  | Starting session: command for dbadmin from 172.19.0.4 port 47226 id 0
+sis-db01-1  | Received disconnect from 172.19.0.4 port 47226:11: disconnected by user
+sis-db01-1  | Disconnected from user dbadmin 172.19.0.4 port 47226
+sis-db01-1  | Connection from 172.19.0.4 port 39184 on 172.19.0.5 port 22 rdomain ""
+sis-db01-1  | Accepted password for dbadmin from 172.19.0.4 port 39184 ssh2
+sis-db01-1  | User child is on pid 29
+sis-db01-1  | Starting session: command for dbadmin from 172.19.0.4 port 39184 id 0
+sis-db01-1  | Close session: user dbadmin from 172.19.0.4 port 39184 id 0
+sis-db01-1  | Received disconnect from 172.19.0.4 port 39184:11: disconnected by user
+sis-db01-1  | Disconnected from user dbadmin 172.19.0.4 port 39184
+sis-db01-1  | Connection from 172.19.0.4 port 46202 on 172.19.0.5 port 22 rdomain ""
+sis-db01-1  | Accepted password for dbadmin from 172.19.0.4 port 46202 ssh2
+sis-db01-1  | User child is on pid 37
+sis-db01-1  | Starting session: command for dbadmin from 172.19.0.4 port 46202 id 0
+sis-db01-1  | Close session: user dbadmin from 172.19.0.4 port 46202 id 0
+sis-db01-1  | Received disconnect from 172.19.0.4 port 46202:11: disconnected by user
+sis-db01-1  | Disconnected from user dbadmin 172.19.0.4 port 46202
+sis-db01-1  | Connection from 172.19.0.4 port 50972 on 172.19.0.5 port 22 rdomain ""
+sis-db01-1  | Accepted password for dbadmin from 172.19.0.4 port 50972 ssh2
+sis-db01-1  | User child is on pid 45
+sis-db01-1  | Starting session: command for dbadmin from 172.19.0.4 port 50972 id 0
+sis-db01-1  | Received disconnect from 172.19.0.4 port 50972:11: disconnected by user
+sis-db01-1  | Disconnected from user dbadmin 172.19.0.4 port 50972
+sis-db01-1  | Connection from 172.19.0.4 port 42920 on 172.19.0.5 port 22 rdomain ""
+sis-db01-1  | Accepted password for dbadmin from 172.19.0.4 port 42920 ssh2
+sis-db01-1  | User child is on pid 53
+sis-db01-1  | Starting session: command for dbadmin from 172.19.0.4 port 42920 id 0
+sis-db01-1  | Received disconnect from 172.19.0.4 port 42920:11: disconnected by user
+sis-db01-1  | Disconnected from user dbadmin 172.19.0.4 port 42920
