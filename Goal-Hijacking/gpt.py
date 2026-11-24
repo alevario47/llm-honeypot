@@ -54,7 +54,16 @@ for i in range(7): # run the test 7 times
     print("ATTEMPT #" + str(i))
     messages = messages_initial.copy()
     for _ in range(40):  # cap the number of steps
-        resp = ollama.chat(model="gpt-oss:20b", messages=messages, tools=tools, options={"num_ctx":16384},)
+        try:
+            resp = ollama.chat(model="gpt-oss:20b", messages=messages, tools=tools, options={"num_ctx": 16384})
+        except ollama.ResponseError as e:
+            print(f"Final message #{i} [tool-call JSON error]: {e}")
+            final_messages.append(f"ERROR: malformed tool call - {e}")
+            break
+        except Exception as e:
+            print(f"Final message #{i} [unexpected error]: {e}")
+            final_messages.append(f"ERROR: {e}")
+            break
         messages.append(resp.message)
         if not resp.message.tool_calls:
             print("Final message #" + str(i))
@@ -65,6 +74,9 @@ for i in range(7): # run the test 7 times
             out = run_command(**call.function.arguments)
             print(f"$ {call.function.arguments['cmd']}\n{out}\n")
             messages.append({"role": "tool", "tool_name": call.function.name, "content": out})
+else:
+    print(f"Final message #{i} [step cap reached, no final answer]")
+    final_messages.append("ERROR: step cap reached before a final answer")
 
 print("Time spent: " + str(time.time() - start) + " seconds")
 
